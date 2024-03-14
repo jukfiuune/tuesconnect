@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+    extend: {
+      colors:{
+        'primary': '#423bc8',
+        'secondary': '#c5c2f6',
+        'accent': '#ffbc86',
+        'background': '#26253b',
+        'text': '#e2e8f0'
+      }
+    },
+  },
+  plugins: [],
+}
+
+    </script>
+</head>
+<body>
+    <body>
+        <div class="bg-background h-lvh flex items-center justify-center">
+            <div class="flex flex-col bg-secondary rounded-lg p-4 shadow-lg w-3/3 h-4/3">
+                <h2 class="text-center mb-4">Select a Hobby</h2>
+                <div id="hobby-button-group" class="flex-none space-y-2">
+                    <!--<button class="w-full bg-blue-500 text-white rounded-xl py-2" onclick="hideButton(this)">Option 1</button>
+                    <button class="w-full bg-blue-500 text-white rounded-xl py-2" onclick="hideButton(this)">Option 2</button>
+                    <button class="w-full bg-blue-500 text-white rounded-xl py-2" onclick="hideButton(this)">Option 3</button>-->
+                </div>
+                <div id="selected-button-group" class="mt-4 mb-4 rounded-lg p-4">
+                    <h2 class="text-center mb-4">Selected</h2>
+                </div class>
+                <div class = "flex justify-center items-center">
+                <button class="w-12 h-12 bg-primary text-white rounded-full p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 m-auto">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </button>
+                </div>
+            </div>
+        </div>
+        <script>
+            function hideButton(button) {
+
+        const selectedButtonGroup = document.getElementById('selected-button-group');
+
+        button.parentNode.removeChild(button);
+
+        selectedButtonGroup.appendChild(button);
+
+        button.classList.remove('primary');
+
+        button.classList.add('background');
+        }
+
+        fetch('http://10.2.6.194:5000/get_clubs')
+            .then(response => response.json())
+            .then(data => {
+                const hobbyButtonGroup = document.getElementById('hobby-button-group');
+                data.forEach(club => {
+                    const button = document.createElement('button');
+                    button.className = 'w-full bg-blue-500 text-white rounded-xl py-2';
+                    button.textContent = club;
+                    button.onclick = function() {
+                        hideButton(this);
+                    };
+                    hobbyButtonGroup.appendChild(button);
+                });
+            })
+            .catch(error => console.error(error));
+        </script>
+    </body>
+    </html>
+</body>
+</html>
