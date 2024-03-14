@@ -120,7 +120,20 @@ def create_club():
         json.dump({"messages": []}, file)
     with open("data.json", "w") as file:
         json.dump(data, file)
+    data["users"][list(data["users"].keys())[id]]["hobbies"].append(clubname)
     return jsonify(data["clubs"])
+
+@app.route("/add_user_to_club", methods=["POST"])
+@cross_origin()
+def add_user_to_club():
+    req_data = request.get_json()
+    clubname = req_data["clubname"]
+    id = req_data["id"]
+    if clubname not in data["clubs"]:
+        return "Club not found", 404
+    usr_dict = data["users"][list(data["users"].keys())[id]]
+    usr_dict["username"] = list(data["users"].keys())[id]
+    return jsonify(usr_dict)
 
 @app.route("/get_user", methods=["GET"])
 @cross_origin()
