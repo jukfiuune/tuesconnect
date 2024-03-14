@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import json
 import time
 import hashlib
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Load users and clubs from JSON files
 try:
@@ -13,6 +16,7 @@ except (FileNotFoundError, ValueError):
     data = {"users": {}, "clubs": []}
 
 @app.route("/register", methods=["POST"])
+@cross_origin()
 def register():
     req_data = request.get_json()
     username = req_data["username"]
@@ -36,6 +40,7 @@ def register():
     return jsonify(list(data["users"].keys()))
 
 @app.route("/login", methods=["POST"])
+@cross_origin()
 def login():
     req_data = request.get_json()
     username = req_data["username"]
@@ -55,6 +60,7 @@ def login():
     return str(list(data["users"].keys()).index(username))
 
 @app.route("/send_message", methods=["POST"])
+@cross_origin()
 def send_message():
     req_data = request.get_json()
     id = int(req_data["id"])
@@ -80,6 +86,7 @@ def send_message():
     return jsonify({"id": id, "message": message, "timestamp": timestamp})
 
 @app.route("/get_message", methods=["GET"])
+@cross_origin()
 def get_message():
     req_data = request.get_json()
     clubname = req_data["clubname"]
@@ -99,10 +106,12 @@ def get_message():
     return jsonify(msgs)
 
 @app.route("/get_clubs", methods=["GET"])
+@cross_origin()
 def get_clubs():
     return jsonify(data["clubs"])
 
 @app.route("/create_club", methods=["POST"])
+@cross_origin()
 def create_club():
     req_data = request.get_json()
     clubname = req_data["clubname"]
@@ -114,6 +123,7 @@ def create_club():
     return jsonify(data["clubs"])
 
 @app.route("/get_user", methods=["GET"])
+@cross_origin()
 def get_user():
     req_data = request.get_json()
     id = int(req_data["id"])
