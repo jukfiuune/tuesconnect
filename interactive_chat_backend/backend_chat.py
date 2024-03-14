@@ -3,10 +3,12 @@ from flask_cors import CORS, cross_origin
 import json
 import time
 import hashlib
+import jwt
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+secret_key = "very_important_and_secret_key"
 
 # Load users and clubs from JSON files
 try:
@@ -14,6 +16,21 @@ try:
         data = json.load(file)
 except (FileNotFoundError, ValueError):
     data = {"users": {}, "clubs": []}
+
+def generate_token(id):
+    payload = {
+        'exp': time.time() + 1800,
+        'gen': time.time(),
+        'id': id
+    }
+    return jwt.encode(payload, secret_key, algorithm='HS256')
+
+def validate_token(id, token):
+    decoded_token = jwt.decode(token, secret_key, algorithms='HS256')
+    curr_time = time.time()
+    if decoded_token["exp"] <= curr_time or decoded_token["id"] != id:
+        return 401
+    return 200
 
 @app.route("/register", methods=["POST"])
 @cross_origin()
@@ -57,7 +74,8 @@ def login():
     if hash_password != user["password"]:
         return "Incorrect password", 401
 
-    return str(list(data["users"].keys()).index(username))
+    id = int(list(data["users"].keys()).index(username))
+    return jsonify(generate_token(id))
 
 @app.route("/send_message", methods=["POST"])
 @cross_origin()
@@ -66,7 +84,15 @@ def send_message():
     id = int(req_data["id"])
     clubname = req_data["clubname"]
     message = req_data["message"]
-
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(id, token)
+    except:
+        return "Token cannot be found", 401
+    
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    
     if clubname not in data["clubs"]:
         return "Club not found", 404
 
@@ -140,6 +166,15 @@ def add_user_to_club():
 def get_user():
     req_data = request.get_json()
     id = int(req_data["id"])
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(id, token)
+    except:
+        return "Token cannot be found", 401
+    
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    
     usr_dict = data["users"][list(data["users"].keys())[id]]
     usr_dict["username"] = list(data["users"].keys())[id]
     return jsonify(usr_dict)
