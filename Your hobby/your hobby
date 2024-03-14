@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акаунт</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #26253b;
+        }
+        header {
+          background-color:yellowgreen;
+          color: #fff;
+          padding: 40px;
+          text-align: center;
+        
+        }
+        .Akaunt {
+          padding: 1rem 3rem;
+          font-size: 1rem;
+          border: none;
+          color: #e2e8f0;
+          background:#26253b;
+          cursor: pointer;
+          border-radius: 50px;
+          width: 100px;
+          margin-left: 45%;
+               } 
+               
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            color: #ddd;
+        }
+        section {
+            padding: 20px;
+            color: #ffbc86;
+            align-items: center;
+        }
+        footer {
+            background-color: #333;
+            color: #ffbc86;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        button{
+            margin: 3% 2%;
+            width: 15%;
+            padding: 20px;
+            border:none;
+            border-radius: 30px;
+        }
+        button:hover{
+            opacity: 80%;
+            box-shadow: 7px 7px 5px;
+        }
+        button:active{
+            opacity: 60%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="Akaunt">Акаунт</h1>
+    </header>
+    <nav>
+        <a href="#">Начало</a>
+        <a href="#">За нас</a>
+        <a href="#">Контакти</a>
+    </nav>
+    <section>
+        <button>Piano</button>
+        <button>Guitar</button>
+        <button>Drums</button>
+        <button>Basketball</button>
+        <button>Football</button>
+        <button>Baseball</button>
+        <button>Swimming</button>
+        <button>Climbing</button>
+        <button>Gaming</button>
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>
+
 
