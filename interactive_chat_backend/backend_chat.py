@@ -102,5 +102,24 @@ def get_message():
 def get_clubs():
     return jsonify(data["clubs"])
 
+@app.route("/create_club", methods=["POST"])
+def create_club():
+    req_data = request.get_json()
+    clubname = req_data["clubname"]
+    data["clubs"].append(clubname)
+    with open(clubname + ".json", "w") as file:
+        json.dump({"messages": []}, file)
+    with open("data.json", "w") as file:
+        json.dump(data, file)
+    return jsonify(data["clubs"])
+
+@app.route("/get_user", methods=["GET"])
+def get_user():
+    req_data = request.get_json()
+    id = int(req_data["id"])
+    usr_dict = data["users"][list(data["users"].keys())[id]]
+    usr_dict["username"] = list(data["users"].keys())[id]
+    return jsonify(usr_dict)
+
 if __name__ == "__main__":
     app.run()
