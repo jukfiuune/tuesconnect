@@ -129,8 +129,11 @@ def add_user_to_club():
     req_data = request.get_json()
     clubname = req_data["clubname"]
     id = req_data["id"]
-    if clubname not in data["clubs"]:
-        return "Club not found", 404
+    for clubs in clubname:
+        if clubs not in data["clubs"]:
+            return "Club not found", 404
+        else:
+            data["users"][list(data["users"].keys())[id]]["hobbies"].append(clubs)
     usr_dict = data["users"][list(data["users"].keys())[id]]
     usr_dict["username"] = list(data["users"].keys())[id]
     return jsonify(usr_dict)
