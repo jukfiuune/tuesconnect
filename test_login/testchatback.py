@@ -3,7 +3,7 @@ import datetime
 
 data={}
 
-with open("/home/uguuuu/tuesconnect/testchats.json", "r") as file:
+with open("testchats.json", "r") as file:
     data = json.load(file)
 
 usernames = list(data["users"].keys())
