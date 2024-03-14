@@ -122,4 +122,4 @@ def get_user():
     return jsonify(usr_dict)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
