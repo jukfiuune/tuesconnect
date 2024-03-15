@@ -16,14 +16,30 @@
         'accent': '#ffbc86',
         'hover-accent': '#eda266',
         'background': '#26253b',
+        'darker-background': '#1b1a2e',
         'text': '#e2e8f0'
       }
     },
   },
   plugins: [],
+  
 }
 
     </script>
+
+    <style>
+      .letter {
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
+  
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+        
+      }
+    </style>
 </head>
   <body class="m-0 p-0">
     <div class="bg-background h-screen">
@@ -56,10 +72,22 @@
          </div>
        </nav>
        <div class="flex justify-center items-center">
-        <svg viewBox="0 140 260 75" class="inline-block align-top w-3/4 mx-auto -mb-15">
-            <path id="curve" d="M 0 240 Q 130 120, 260 240" fill="none" stroke="rgba(0, 0, 0, 0)"></path>
-            <text class="text fill-text text-3xl" text-anchor="middle"> 
-                <textPath class="text__path" href="#curve" startOffset="50%">TUESconnect</textPath>
+        <svg viewBox="0 140 260 78" class="inline-block align-top w-3/4 mx-auto -mb-15">
+            <path id="curve" d="M 0 240 Q 130 110, 260 240" fill="none" stroke="rgba(0, 0, 0, 0)"></path>
+            <text class="text fill-text text-2xl" text-anchor="middle"> 
+              <textPath class="text__path" href="#curve" startOffset="50%">
+                <tspan class="letter" style="animation-delay: 0s;">T</tspan>
+                <tspan class="letter" style="animation-delay: 0.1s;">U</tspan>
+                <tspan class="letter" style="animation-delay: 0.2s;">E</tspan>
+                <tspan class="letter" style="animation-delay: 0.3s;">S</tspan>
+                <tspan class="letter" style="animation-delay: 0.4s;">c</tspan>
+                <tspan class="letter" style="animation-delay: 0.5s;">o</tspan>
+                <tspan class="letter" style="animation-delay: 0.6s;">n</tspan>
+                <tspan class="letter" style="animation-delay: 0.7s;">n</tspan>
+                <tspan class="letter" style="animation-delay: 0.8s;">e</tspan>
+                <tspan class="letter" style="animation-delay: 0.9s;">c</tspan>
+                <tspan class="letter" style="animation-delay: 1s;">t</tspan>
+              </textPath>
             </text>
         </svg>
       </div>
@@ -70,6 +98,14 @@
         <button class="bg-primary text-text py-10 px-10 rounded-lg hover:bg-hover-primary" onclick="location.href='userpage.html';">Resources</button>
         <button class="bg-accent text-background py-10 rounded-lg hover:bg-hover-accent" onclick="location.href='userpage.html';">Profile</button>
       </div>
+      <!--<div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-20 mt-4">
+        <div class="bg-darker-background rounded-lg w-1/2">
+          <p class="text-text">TUESconnect is a chat app that enables you to join communties based on your interest with your</p>
+        </div>
+        <div class="bg-darker-background rounded-lg">
+          <p>Features:</p>
+        </div>
+      </div>-->
     </div>
  </body>
  <script>
