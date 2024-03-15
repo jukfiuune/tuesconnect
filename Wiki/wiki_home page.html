@@ -8,32 +8,62 @@
         p {
             color: black;
         }
-        img {
-            height: 50px;
-            width: 90px;
-            height: auto;
-            position: absolute;
-            top: 8px;
-            right: 16px;
-            font-size: 18px;
-        }
-        h1 {
-            text-align: center; /
+        
+        header {
+            text-align: center; 
+            background-color: #1b1a2e;
+            width: 100%;
+            padding: 20px;
+            color: blanchedalmond;
         }
         body {
             text-align: center; 
+            background: #26253b;
         }
-        
+        button {
+            color: white;
+            background-color: #6e5d7b;
+            border-radius: 38px; 
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 15px 30px; 
+            font-size: 20px; 
+            margin: 10px ; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+        }
+        button:hover {
+            color: #eda266;
+            background-color: rgb(77, 16, 135);
+        }
+
+        .box {
+            background:#26253b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 20%;
+            height: auto; 
+            border-radius:38px ;
+            margin: auto; 
+            margin-top: 60px; 
+            padding: 10px; 
+        }
     </style>
 </head>
-<h1>Tips on how to succeed in TUES</h1>
 <body>
-    <img class="ing" src="Tues.png">
+<header><h1>Tips on how to succeed in TUES</h1></header>
+   
+<div class="box">
+    <a class="link" href="http://127.0.0.1:5500/5page.html"><button>1 How to remove distractions when you study</button></a>
     <hr>
-    <a class="link" href="http://127.0.0.1:5500/1page.html">1 How to take good notes</a>
-    <a class="link" href="http://127.0.0.1:5500/2page.html">2 Mindmapping</a>
-    <a class="link" href="http://127.0.0.1:5500/3page.html">3 Scheduling</a>
-    <a class="link" href="http://127.0.0.1:5500/4page.html">4 Anki</a>
-    <a class="link" href="http://127.0.0.1:5500/5page.html">5 How to remove distractions when you study</a>
+    <a class="link" href="http://127.0.0.1:5500/1page.html"> <button>2 How to take good notes</button></a>
+    <hr>
+    <a class="link" href="http://127.0.0.1:5500/2page.html"><button>3 Mindmapping</button></a>
+    <hr>
+    <a class="link" href="http://127.0.0.1:5500/3page.html"><button>4 Scheduling</button></a>
+    <hr>
+    <a class="link" href="http://127.0.0.1:5500/4page.html"><button>5 Anki(flashcards)</button></a>
+</div>
 </body>
 </html>
