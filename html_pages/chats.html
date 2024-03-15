@@ -26,41 +26,41 @@
     </script>
 </head>
   <body>
-    <div class="flex h-screen bg-lighter-blue p-4">
+    <div class="flex h-screen bg-background p-4">
         <!-- Chat list -->
-        <div class="flex flex-col w-64 border-r border-background px-4 py-6">
-          <div class="rounded-lg bg-background">
-            <h2 class="flex justify-center items-center mt-3 text-text text-3xl mb-4">Chats</h2>
+        <div class="flex flex-col w-64 border-r border-lighter-blue px-4 py-6">
+          <div class="rounded-lg bg-lighter-blue mb-4">
+            <h2 class="flex justify-center items-center mt-3 text-text text-3xl pb-4">Groups</h2>
          </div>
           <div class="flex-grow overflow-y-auto">
-            <button class="w-full text-left px-4 py-2 rounded hover:bg-gray-100">Chat 1</button>
-            <button class="w-full text-left px-4 py-2 rounded hover:bg-gray-100">Chat 2</button>
-            <!-- More chats -->
+            <!-- Chat button template -->
+            <button class="w-full text-left text-text px-4 py-10 rounded-xl border border-lighter-blue bg-primarys bg-opacity-50 mb-4 hover:bg-primary">Chat 1</button>
+            <button class="w-full text-left text-text px-4 py-10 rounded-xl border border-lighter-blue bg-primarys bg-opacity-50 mb-4 hover:bg-primary">Chat 1</button>
           </div>
         </div>
         <!-- Chat content -->
-        <div class="flex flex-col flex-grow ml-4">
-          <!-- Message list -->
-          <div class="flex-grow overflow-y-auto p-4 space-y-4">
-            <div class="flex items-end space-x-2">
-              <div class="flex-none">
-                <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg">
+        <div class="flex flex-col flex-grow">
+            <!-- Message list -->
+            <div class="flex-grow overflow-y-auto p-4 space-y-4 flex flex-col justify-end">
+              <div class="flex items-end space-x-2">
+                <!--Other person's message template-->
+                <div class="flex-none">
+                    <!--pfp-->
+                  <img class="h-10 w-10 rounded-full" src="">
+                </div>
+                <div class="bg-lighter-blue text-text rounded-xl px-4 py-2">Hello!</div>
               </div>
-              <div class="bg-blue-500 text-white rounded-lg px-4 py-2">Hello!</div>
+                <!-- Your message template -->
+                    <div class="flex items-end space-x-2 justify-end">
+                        <div class="flex-none">
+                    </div>
+                    <div class="bg-gray-300 rounded-lg px-4 py-2">Hi!</div>
+                </div>
+            <!-- Message input -->
+            <div class="border-t border-lighter-blue p-4">
+              <input class="w-full rounded-lg bg-lighter-blue text-black px-4 py-2" placeholder="Type a message">
             </div>
-            <div class="flex items-end space-x-2">
-              <div class="flex-none">
-                <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/1.jpg">
-              </div>
-              <div class="bg-gray-300 rounded-lg px-4 py-2">Hi!</div>
-            </div>
-            <!-- More messages -->
           </div>
-          <!-- Message input -->
-          <div class="border-t border-gray-300 p-4">
-            <input class="w-full rounded-lg px-4 py-2" placeholder="Type a message">
-          </div>
-        </div>
       </div>
  </body>
  </html>
