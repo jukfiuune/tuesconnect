@@ -23,7 +23,14 @@
 }
 
     </script>
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+      * {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
 </head>
 <body>
     <div class="min-h-screen py-40" style="background-image: linear-gradient(115deg, #26253b, #ffbc86);">
@@ -89,7 +96,7 @@
                             password: password
                         };
 
-                        fetch("http://10.2.6.187:5000/register", {
+                        fetch("http://127.0.0.1:5000/register", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
@@ -116,7 +123,7 @@
                             password: password
                         };
 
-                        fetch("http://10.2.6.187:5000/register", {
+                        fetch("http://127.0.0.1:5000/register", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"

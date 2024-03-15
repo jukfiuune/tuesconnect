@@ -24,7 +24,14 @@
 }
 
         </script>
-        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <style>
+          * {
+            font-family: 'Poppins', sans-serif;
+          }
+        </style>
 </head>
     <body>
         <div class="flex h-screen bg-background p-4">
@@ -57,7 +64,7 @@
                 }
                 let selectedClub = ""; // Declare the selectedClub variable and assign a default value
                 localStorage.setItem("last_msg_ts", 0);
-                fetch("http://10.2.6.187:5000/get_user", {
+                fetch("http://127.0.0.1:5000/get_user", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -99,7 +106,7 @@
                         "last_msg_ts": localStorage.getItem("last_msg_ts"),
                         "clubname": selectedClub
                     }
-                    fetch("http://10.2.6.187:5000/get_message", {
+                    fetch("http://127.0.0.1:5000/get_message", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -113,7 +120,7 @@
                         var messagesDiv = document.getElementById("messages-div");
                         data.forEach(message => {
                             let username;
-                    fetch("http://10.2.6.187:5000/get_user", {
+                    fetch("http://127.0.0.1:5000/get_user", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -146,6 +153,7 @@
                             } else {
                                 messagesDiv.innerHTML += messageTemplateIncoming;
                             }
+                            document.getElementById('message-input').scrollIntoView({ behavior: 'smooth' });
                     })
                     .catch(error => {
                         console.error("Unable to fetch user:", error);
@@ -162,7 +170,7 @@
                             console.error("Unable to send message:", error);
                         }
                     });
-                    fetch("http://10.2.6.187:5000/regenerate_token", {
+                    fetch("http://127.0.0.1:5000/regenerate_token", {
                                 method: "POST",
                                 headers: {
                                         "Content-Type": "application/json"
@@ -193,7 +201,7 @@
                                     "myid": localStorage.getItem("myid"),
                                     "clubname": selectedClub
                                 }
-                                fetch("http://10.2.6.187:5000/send_message", {
+                                fetch("http://127.0.0.1:5000/send_message", {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json"
@@ -216,6 +224,7 @@
                                         
                                     // Append the template to the div
                                     messagesDiv.innerHTML += messageTemplate;
+                                    document.getElementById('message-input').scrollIntoView({ behavior: 'smooth' });
                                     localStorage.setItem("last_msg_ts", data.timestamp);
                                 })
                                 .catch(error => {

@@ -196,6 +196,8 @@ def add_user_to_club():
             data["users"][list(data["users"].keys())[myid]]["hobbies"].append(clubs)
     usr_dict = data["users"][list(data["users"].keys())[myid]]
     usr_dict["username"] = list(data["users"].keys())[myid]
+    with open("data.json", "w") as file:
+        json.dump(data, file)
     return jsonify(usr_dict)
 
 @app.route("/add_description_to_user", methods=["POST"])
