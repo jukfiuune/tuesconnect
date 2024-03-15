@@ -52,20 +52,26 @@
                     </div>
             </div>
             <script>
-                let selectedClub = "Guitar"; // Declare the selectedClub variable and assign a default value
+                function isEmptyOrSpaces(str){
+                  return str === null || (/^\s*$/).test(str);
+                }
+                let selectedClub = ""; // Declare the selectedClub variable and assign a default value
                 localStorage.setItem("last_msg_ts", 0);
-                fetch("http://10.2.6.187:5000/get_clubs", {
-                        method: "GET",
+                fetch("http://10.2.6.187:5000/get_user", {
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json"
-                        }
+                        },
+                        body: JSON.stringify({"myid":localStorage.getItem("myid")})
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Clubs fetched:", data);
+                        console.log("Clubs fetched:", data.hobbies);
                         var chatsList = document.getElementById("chats-list");
-                        data.forEach(message => {
+                        selectedClub = data.hobbies[0];
+                        data.hobbies.forEach(message => {
                             // Define the HTML template
+                            
                             var buttonTemplate = `
                                 <button onclick="switchClub(this)" class="w-full text-left text-text px-4 py-10 rounded-xl border border-lighter-blue bg-primarys bg-opacity-50 mb-4 hover:bg-primary">${message}</button>
                             `;
@@ -179,6 +185,7 @@
                 document.getElementById("message-input").addEventListener("keyup", function(event) {
                         if (event.key === "Enter") {
                                 var message = document.getElementById("message-input").value;
+                                if(!isEmptyOrSpaces(message)){
                                 document.getElementById("message-input").value = "";
                                 data = {
                                     "message": message,
@@ -214,6 +221,7 @@
                                 .catch(error => {
                                     console.error("Unable to send message:", error);
                                 });
+                              }
                         }
                 });
                 document.getElementById('scroll-to-bottom').addEventListener('click', function() {

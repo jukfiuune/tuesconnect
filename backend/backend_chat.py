@@ -28,7 +28,7 @@ def generate_token(myid):
 def validate_token(myid, token):
     decoded_token = jwt.decode(token, secret_key, algorithms='HS256')
     curr_time = time.time()
-    if decoded_token["exp"] <= curr_time or decoded_token["myid"] != myid:
+    if float(decoded_token["exp"]) <= float(curr_time) or int(decoded_token["myid"]) != int(myid):
         print(decoded_token["exp"], curr_time, decoded_token["myid"], myid)
         return 401
     return 200
@@ -40,7 +40,6 @@ def register():
     username = req_data["username"]
     email = req_data["email"]
     password = req_data["password"]
-    hobbies = req_data["hobbies"]
 
     hash_object = hashlib.sha256()
     hash_object.update(password.encode())
@@ -49,7 +48,8 @@ def register():
     data["users"][username] = {
         "email": email,
         "password": hash_password,
-        "hobbies": hobbies,
+        "hobbies": [],
+        "description": ""
     }
 
     with open("data.json", "w") as file:
@@ -164,6 +164,7 @@ def get_clubs():
 def create_club():
     req_data = request.get_json()
     clubname = req_data["clubname"]
+    myid = int(req_data["myid"])
     data["clubs"].append(clubname)
     with open(clubname + ".json", "w") as file:
         json.dump({"messages": []}, file)
@@ -177,12 +178,44 @@ def create_club():
 def add_user_to_club():
     req_data = request.get_json()
     clubname = req_data["clubname"]
-    myid = req_data["myid"]
+    myid = int(req_data["myid"])
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(myid, token)
+    except:
+        return "Token cannot be found", 401
+    print(valid_code, myid, token)
+
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    
     for clubs in clubname:
-        data["users"][list(data["users"].keys())[myid]]["hobbies"].append(clubs)
+        if clubs not in data["clubs"]:
+            return "Club not found", 404
+        else:
+            data["users"][list(data["users"].keys())[myid]]["hobbies"].append(clubs)
     usr_dict = data["users"][list(data["users"].keys())[myid]]
     usr_dict["username"] = list(data["users"].keys())[myid]
     return jsonify(usr_dict)
+
+@app.route("/add_description_to_user", methods=["POST"])
+@cross_origin()
+def add_description_to_user():
+    req_data = request.get_json()
+    myid = int(req_data["myid"])
+    description = req_data["description"]
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(myid, token)
+    except:
+        return "Token cannot be found", 401
+    
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    data["users"][list(data["users"].keys())[myid]]["description"] = description
+    with open("data.json", "w") as file:
+        json.dump(data, file)
+    return jsonify(data["users"][list(data["users"].keys())[myid]])
 
 @app.route("/get_user", methods=["POST"])
 @cross_origin()

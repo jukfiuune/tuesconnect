@@ -35,17 +35,17 @@
                     <p class="mb-4">This may take a minute</p>
                     <div class="mb-5">
                         <label for="Username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
-                        <input type="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        <input type="username" id="username_mobile" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                     </div>
                     <div class="mb-5">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required />
+                        <input type="email" id="email_mobile" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required />
                     </div>
                     <div class="mb-5">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        <input type="password" id="password_mobile" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                     </div>
-                    <button id = "register-button" class="bg-primary text-white rounded-lg px-4 py-2">
+                    <button onclick="register_mobile()" class="bg-primary text-white rounded-lg px-4 py-2">
                         Register
                     </button>
                 </div>
@@ -70,42 +70,69 @@
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
                     <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                 </div>
-                <button id="register-button" class="bg-primary text-white rounded-lg px-4 py-2">
+                <button onclick="register()"class="bg-primary text-white rounded-lg px-4 py-2">
                     Register
                 </button>
-            </div>
-            </div>
-          </div>
-    </div> 
-    <script>
-        document.getElementById("register-button").onclick = function() {
-            var username = document.getElementById("username").value;
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
+                </div>
+                </div>
+                </div>
+                </div> 
+                <script>
+                    function register() {
+                        var username = document.getElementById("username").value;
+                        var email = document.getElementById("email").value;
+                        var password = document.getElementById("password").value;
 
-            var data = {
-                username: username,
-                email: email,
-                password: password,
-                hobbies: []
-            };
+                        var data = {
+                            username: username,
+                            email: email,
+                            password: password
+                        };
 
-            fetch("http://10.2.6.187:5000/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Registration successful:", data);
-                window.location.replace("login.html");
-            })
-            .catch(error => {
-                console.error("Registration failed:", error);
-            });
-        };
+                        fetch("http://10.2.6.187:5000/register", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Registration successful:", data);
+                            window.location.replace("login.html");
+                        })
+                        .catch(error => {
+                            console.error("Registration failed:", error);
+                        });
+                    }
+                    function register_mobile() {
+                        var username = document.getElementById("username_mobile").value;
+                        var email = document.getElementById("email_mobile").value;
+                        var password = document.getElementById("password_mobile").value;
+
+                        var data = {
+                            username: username,
+                            email: email,
+                            password: password
+                        };
+
+                        fetch("http://10.2.6.187:5000/register", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Registration successful:", data);
+                            window.location.replace("login.html");
+                        })
+                        .catch(error => {
+                            console.error("Registration failed:", error);
+                        });
+                    }
+                </script>
     </script>
 </body>
 </html>
