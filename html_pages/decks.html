@@ -5,172 +5,134 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-
-  <style>
-    body {
-      background: #26253b;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      tailwind.config = {
+          theme: {
+  extend: {
+    colors:{
+      'primary': '#423bc8',
+      'hover-primary': '#312bab',
+      'secondary': '#c5c2f6',
+      'accent': '#ffbc86',
+      'hover-accent': '#eda266',
+      'background': '#26253b',
+      'darker-background': '#1b1a2e',
+      'text': '#e2e8f0'
     }
+  },
+},
+plugins: [],
 
-    .dropdown {
-      display: inline-block;
-      position: relative;
-    }
+}
 
-    button {
-      border: none;
-      border-radius: 5px;
-      padding: 15px 30px;
-      font-size: 18px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-
-    button:hover {
-      background-color: white;
-      z-index: -1;
-    }
-
-    .dropdown-options {
-      display: none;
-      position: absolute;
-      overflow: auto;
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
-    }
-
-    .dropdown:hover .dropdown-options {
-      display: block;
-    }
-
-    .dropdown-options button {
-      display: block;
-      color: #000000;
-      padding: 5px;
-      text-decoration: none;
-      padding: 20px 40px;
-      border: none;
-      /* Remove default button styles */
-      background: transparent;
-      /* Make background transparent */
-      cursor: pointer;
-    }
-
-    .dropdown-options button:hover {
-      color: #0a0a23;
-      background-color: white;
-      border-radius: 5px;
-    }
-
-    #new-deck-input {
-      display: none;
-      padding: 10px;
-      margin-top: 10px;
-      width: 200px;
-      border-radius: 5px;
-      border: 1px solid white;
-    }
-
-    /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-    .flip-card {
-      background-color: transparent;
-      border-radius: 12px;
-      width: 35%;
-      height:300px;
-      border: 2px solid white;
-      perspective: 1000px;
-      z-index: -999;
-      /* Remove this if you don't want the 3D effect */
-    }
-
-    /* This container is needed to position the front and back side */
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-      border-radius: 12px;
-    }
-
-    /* Do an horizontal flip when you move the mouse over the flip box container */
-    .flip-card:active .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    /* Position the front and back side */
-    .flip-card-front,
-    .flip-card-back {
-      position: absolute;
-      border-radius: 12px;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      /* Safari */
-      backface-visibility: hidden;
-    }
-
-    /* Style the front side (fallback if image is missing) */
-    .flip-card-front {
-      background-color: #ffbc86;
-      color: black;
-    }
-
-    /* Style the back side */
-    .flip-card-back {
-      background-color: #ffbc86;
-      color: white;
-      transform: rotateY(180deg);
-    }
-    .flip-card.flip .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-  </style>
+  </script>
 </head>
-
-<body>
-  <div>
-    <div class="dropdown">
-      <button>Decks</button>
-      <div style="z-index: 999;" class="dropdown-options">
-        <button>Japanese</button>
-        <button>Bulgarian</button>
-        <button id="new-deck">Add new deck</button>
-        <input type="text" id="new-deck-input" placeholder="Enter new deck name">
+<body class="bg-background h-screen">
+  <nav class="bg-background">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center">
+         <!-- Logo Only test for now -->
+         <img src="./images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
+         <!--Dropdown for phones-->
+         <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
+           <a href="chats.html" class="block text-text rounded-lg px-4 py-2 mx-2">Chats</a>
+           <a href="decks.html" class="block text-text rounded-lg px-4 py-2 mx-2">Decks</a>
+           <a href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
+           <a href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+         </div>
+          <!--Nav for large screens-->
+         <div class="hidden sm:flex">
+          <!-- Rounded buttons -->
+          <a href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2">Chats</a>
+          <a href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2">My decks</a>
+          <!-- Spacer -->
+          <div class="flex-grow"></div>
+          <!-- Sign in button and registration -->
+          <a href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
+          <a href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
+         </div>
+        </div>
       </div>
     </div>
-    <button>
-      Start sesssion
-    </button>
-    <button>
-      Add new card
-    </button>
-    <input type="text" id="new-card-input" placeholder="Enter new card"
-      style="height: 54px; background-color: white;border-radius: 14px;margin-right: 10px;">
-  </div>
-  <br>
-  <div class="flip-card" style="display: block;">
-    <div class="flip-card-inner">
-      <div class="flip-card-front">
-        <img src="" alt="Avatar" style="width:300px;height:300px;">
-      </div>
-      <div class="flip-card-back">
-        <h1>Rand text here</h1>
-      </div>
+  </nav>
+  <div class="w-auto">
+    <!-- Navbar -->
+    <nav class=" text-black p-4">
+        <div class="flex space-x-4">
+            <button id="prevCard" class="bg-[#a78bfa] hover:bg-secondary p-2 rounded">Previous</button>
+            <button id="nextCard" class="bg-[#a78bfa] hover:bg-secondary p-2 rounded">Next</button>
+
+            <!-- Dropdown Menu Placeholder -->
+            <div class="relative">
+                <button id="dropdownMenuButton" class="bg-[#a78bfa] hover:bg-secondary p-2 rounded">Menu</button>
+                <!-- Dropdown items (hidden by default, show on button click) -->
+                <div id="dropdownMenu" class="hidden absolute bg-[#a78bfa] mt-2 py-2 rounded">
+                    <a href="#" class="block px-4 py-2 hover:bg-secondary">Item 1</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-secondary">Item 2</a>
+                    <!-- Add more items here -->
+                </div>
+            </div>
+
+            <button id="toggleInput" class="bg-[#a78bfa] active:bg-secondary p-2 rounded">Toggle Input/Card</button>
+        </div>
+    </nav>
+
+    <!-- Card with Text Input (front side) -->
+    <div id="card" class="max-w-sm mx-auto my-10 bg-white shadow-lg rounded-lg p-6">
+        <input type="text" placeholder="Your input..." class="input text-gray-800 w-full rounded border-gray-300 p-2"/>
+    </div>
+
+    <!-- Card Backside (hidden by default, show when card is flipped) -->
+    <div id="cardBackside" class="hidden max-w-sm mx-auto my-10 bg-white shadow-lg rounded-lg p-6">
+        <input type="text" placeholder="Backside input..." class="input text-gray-800 w-full rounded border-gray-300 p-2"/>
     </div>
   </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dropdownMenuButton = document.getElementById('dropdownMenuButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const toggleInputButton = document.getElementById('toggleInput');
+        const card = document.getElementById('card');
+        const cardBackside = document.getElementById('cardBackside');
+        let inputEnabled = false;
+
+        dropdownMenuButton.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        toggleInputButton.addEventListener('click', function () {
+            inputEnabled = !inputEnabled;
+            card.classList.toggle('hidden');
+            cardBackside.classList.toggle('hidden');
+        });
+
+        card.addEventListener('click', function () {
+            if (!inputEnabled) {
+                // Implement card flip logic here.
+                // This is a placeholder for the action, e.g., toggling visibility of front/back.
+                card.classList.add('hidden');
+                cardBackside.classList.remove('hidden');
+            }
+        });
+
+        cardBackside.addEventListener('click', function () {
+            if (!inputEnabled) {
+                // Implement card flip back logic here.
+                cardBackside.classList.add('hidden');
+                card.classList.remove('hidden');
+            }
+        });
+    });
+</script>
   <script>
     let data = { "Japanese": [["Arigato", "Thank you"]], "Bulgarian": [["supreme", "leader"], ["neshto", "something"], ["john", "cena"], ["bla", "alb"]] };
     let dropdown = document.querySelector(".dropdown");
     let dropdownOptions = document.querySelector(".dropdown-options");
     let newDeckInput = document.getElementById("new-deck-input");
-    let flipcard = document.querySelector(".flip-card");
+    let flipcard = document.querySelector("transform: rotateY(180deg)");
     flipcard.addEventListener("click", () => {
       flipcard.classList.toggle("flip");
     });
