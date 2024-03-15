@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Userpage</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="custom.css">
   <script>
     tailwind.config = {
       theme: {
@@ -29,6 +28,14 @@
   <script>
     document.getElementById("tags").clientHeight = document.getElementById("decks").clientHeight;
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -73,7 +80,7 @@
         <div id="div1"
           class="w-[100%] h-[100%] mr-10 mx-auto bg-secondary rounded-xl place-items-center p-2 pt-4">
           <div id="interests" class="flex place-items-start flex-wrap">
-            <p class="mt-2 ml-4">Tags:</p>
+            <!--<p class="mt-2 ml-4">Tags:</p>-->
           </div>
           <p id="description" class="text-black text-start text-wrap p-8"></p>
         </div>
@@ -121,7 +128,7 @@
       data.hobbies.forEach(message => {
           // Define the HTML template
           var tagTemplate = `
-          <a href="#" class="${randomColor()}">#${message}</a>
+          <a href="#" class="${randomColor()} p-3">#${message}</a>
           `;
           // Append the template to the div
           interests.innerHTML += tagTemplate;
