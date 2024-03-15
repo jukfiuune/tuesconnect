@@ -83,7 +83,7 @@
                 password: password
             };
 
-            fetch("http://10.2.6.187:5000/login", {
+            fetch("http://127.0.0.1:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -95,7 +95,7 @@
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("myid", data.myid);
                 console.log("Login successful:", data);
-                fetch("http://10.2.6.187:5000/get_user", {
+                fetch("http://127.0.0.1:5000/get_user", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -128,7 +128,7 @@
                 password: password
             };
 
-            fetch("http://10.2.6.187:5000/login", {
+            fetch("http://127.0.0.1:5000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -140,7 +140,7 @@
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("myid", data.myid);
                 console.log("Login successful:", data);
-                fetch("http://10.2.6.187:5000/get_user", {
+                fetch("http://127.0.0.1:5000/get_user", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
