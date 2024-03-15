@@ -17,18 +17,19 @@ try:
 except (FileNotFoundError, ValueError):
     data = {"users": {}, "clubs": []}
 
-def generate_token(id):
+def generate_token(myid):
     payload = {
         'exp': time.time() + 1800,
         'gen': time.time(),
-        'id': id
+        'myid': myid
     }
     return jwt.encode(payload, secret_key, algorithm='HS256')
 
-def validate_token(id, token):
+def validate_token(myid, token):
     decoded_token = jwt.decode(token, secret_key, algorithms='HS256')
     curr_time = time.time()
-    if decoded_token["exp"] <= curr_time or decoded_token["id"] != id:
+    if decoded_token["exp"] <= curr_time or decoded_token["myid"] != myid:
+        print(decoded_token["exp"], curr_time, decoded_token["myid"], myid)
         return 401
     return 200
 
@@ -74,19 +75,30 @@ def login():
     if hash_password != user["password"]:
         return "Incorrect password", 401
 
-    id = int(list(data["users"].keys()).index(username))
-    return jsonify({"token": generate_token(id), "id": id})
+    myid = int(list(data["users"].keys()).index(username))
+    return jsonify({"token": generate_token(myid), "myid": myid})
+
+@app.route("/regenerate_token", methods=["POST"])
+@cross_origin()
+def regenerate_token():
+    req_data = request.get_json()
+    myid = int(req_data["myid"])
+    token = req_data["token"]
+    valid_code = validate_token(myid, token)
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    return jsonify({"token": generate_token(myid), "myid": myid})
 
 @app.route("/send_message", methods=["POST"])
 @cross_origin()
 def send_message():
     req_data = request.get_json()
-    id = int(req_data["id"])
+    myid = int(req_data["myid"])
     clubname = req_data["clubname"]
     message = req_data["message"]
     try:
         token = req_data["token"]
-        valid_code = validate_token(id, token)
+        valid_code = validate_token(myid, token)
     except:
         return "Token cannot be found", 401
     
@@ -104,19 +116,30 @@ def send_message():
         pass
 
     timestamp = time.time()
-    clubdata["messages"].append({"id": id, "message": message, "timestamp": timestamp})
+    clubdata["messages"].append({"myid": myid, "message": message, "timestamp": timestamp})
 
     with open(clubname + ".json", "w") as file:
         json.dump(clubdata, file)
 
-    return jsonify({"id": id, "message": message, "timestamp": timestamp})
+    return jsonify({"myid": myid, "message": message, "timestamp": timestamp})
 
-@app.route("/get_message", methods=["GET"])
+@app.route("/get_message", methods=["POST"])
 @cross_origin()
 def get_message():
     req_data = request.get_json()
     clubname = req_data["clubname"]
     last_msg_ts = float(req_data["last_msg_ts"])
+    print(last_msg_ts)
+    myid = int(req_data["myid"])
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(myid, token)
+    except:
+        return "Token cannot be found", 401
+    
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    
     if clubname not in data["clubs"]:
         return "Club not found", 404
     clubdata = {}
@@ -146,7 +169,7 @@ def create_club():
         json.dump({"messages": []}, file)
     with open("data.json", "w") as file:
         json.dump(data, file)
-    data["users"][list(data["users"].keys())[id]]["hobbies"].append(clubname)
+    data["users"][list(data["users"].keys())[myid]]["hobbies"].append(clubname)
     return jsonify(data["clubs"])
 
 @app.route("/add_user_to_club", methods=["POST"])
@@ -154,23 +177,23 @@ def create_club():
 def add_user_to_club():
     req_data = request.get_json()
     clubname = req_data["clubname"]
-    id = req_data["id"]
+    myid = req_data["myid"]
     for clubs in clubname:
-        data["users"][list(data["users"].keys())[id]]["hobbies"].append(clubs)
-    usr_dict = data["users"][list(data["users"].keys())[id]]
-    usr_dict["username"] = list(data["users"].keys())[id]
+        data["users"][list(data["users"].keys())[myid]]["hobbies"].append(clubs)
+    usr_dict = data["users"][list(data["users"].keys())[myid]]
+    usr_dict["username"] = list(data["users"].keys())[myid]
     return jsonify(usr_dict)
 
-@app.route("/get_user", methods=["GET"])
+@app.route("/get_user", methods=["POST"])
 @cross_origin()
 def get_user():
     req_data = request.get_json()
-    id = int(req_data["id"])    
-    usr_dict = data["users"][list(data["users"].keys())[id]]
-    usr_dict["username"] = list(data["users"].keys())[id]
+    myid = int(req_data["myid"])    
+    usr_dict = data["users"][list(data["users"].keys())[myid]]
+    usr_dict["username"] = list(data["users"].keys())[myid]
     return jsonify(usr_dict)
 
-@app.route("/get_user_via_token", methods=["GET"])
+@app.route("/get_user_via_token", methods=["POST"])
 @cross_origin()
 def get_user_via_token():
     req_data = request.get_json()
@@ -179,10 +202,10 @@ def get_user_via_token():
         decoded = jwt.decode(token, secret_key, algorithms='HS256')
     except:
         return "Token cannot be found", 401
-    id = int(decoded["id"])
+    myid = int(decoded["myid"])
     
-    usr_dict = data["users"][list(data["users"].keys())[id]]
-    usr_dict["username"] = list(data["users"].keys())[id]
+    usr_dict = data["users"][list(data["users"].keys())[myid]]
+    usr_dict["username"] = list(data["users"].keys())[myid]
     return jsonify(usr_dict)
 
 if __name__ == "__main__":
