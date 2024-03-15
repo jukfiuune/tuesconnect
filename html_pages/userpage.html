@@ -26,7 +26,6 @@
 
     </script>
 </head>
-<body>
   <body>
     <div class="bg-background h-vh">
       <nav class="bg-background">
@@ -36,7 +35,8 @@
              <!-- Logo Only test for now -->
              <img src="./images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
              <!--Dropdown for phones-->
-             <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
+             <div id="menu" class="hidden sm:hidden absolute bg-background mt-56">
+               <a href="index.html" class="block text-text rounded-lg px-4 py-2 mx-2">←</a>
                <a href="chats.html" class="block text-text rounded-lg px-4 py-2 mx-2">Chats</a>
                <a href="decks.html" class="block text-text rounded-lg px-4 py-2 mx-2">Decks</a>
                <a href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
@@ -98,7 +98,11 @@
     </div>
     </div>
  </body>
+ <script>
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('hidden');
+  }
+</script>
  </html>
-</body>
 </html>
 
