@@ -57,38 +57,48 @@ plugins: [],
       </div>
     </div>
   </nav>
-  <div class="w-auto">
-    <!-- Navbar -->
-    <nav class=" text-black p-4">
-        <div class="flex space-x-4">
-            <button id="prevCard" class="bg-[#a78bfa] hover:bg-secondary p-2 rounded">Previous</button>
-            <button id="nextCard" class="bg-[#a78bfa] hover:bg-secondary p-2 rounded">Next</button>
+  <div class="min-h-scree flex justify-center items-center">
+    <!-- Card with Navbar and Text Input -->
+    <div class=" w-1/3 h-auto mx-auto my-10 bg-white shadow-lg rounded-lg">
+        <!-- Navbar inside card -->
+        <nav class="bg-white text-black p-4 rounded-t-lg">
+            <div class="flex justify-between">
+                <button id="prevCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
+                  <img style="height: 25px; width: 25px;" src="./images/arrow_left.png" alt="arrow">
+                </button>
+                <button id="nextCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
+                  <img style="height: 25px; width: 25px;" src="./images/arrow_right.png" alt="arrow">
+                </button>
 
-            <!-- Dropdown Menu Placeholder -->
-            <div class="relative">
-                <button id="dropdownMenuButton" class="bg-[#a78bfa] hover:bg-secondary p-2 rounded">Menu</button>
-                <!-- Dropdown items (hidden by default, show on button click) -->
-                <div id="dropdownMenu" class="hidden absolute bg-[#a78bfa] mt-2 py-2 rounded">
-                    <a href="#" class="block px-4 py-2 hover:bg-secondary">Item 1</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-secondary">Item 2</a>
-                    <!-- Add more items here -->
+                <!-- Dropdown Menu Placeholder -->
+                <div class="relative">
+                    <button id="dropdownMenuButton" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
+                      <img style="height: 25px; width: 25px;" src="./images/card.png" alt="menu">
+                    </button>
+                    <!-- Dropdown items (hidden by default, show on button click) -->
+                    <div id="dropdownMenu" class="hidden absolute bg-secondary mt-2 py-2 rounded">
+                        <a href="#" class="block px-4 py-2 hover:bg-[#a78bfa]">Item 1</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-[#a78bfa]">Item 2</a>
+                    </div>
                 </div>
+
+                <button id="toggleInput" class="bg-secondary focus:bg-[#a78bfa] p-2 rounded">
+                  <img style="height: 25px; width: 25px;" src="./images/pencil.png" alt="edit">
+                </button>
             </div>
-
-            <button id="toggleInput" class="bg-[#a78bfa] active:bg-secondary p-2 rounded">Toggle Input/Card</button>
+        </nav>
+        
+        <!-- Text Input (front side) -->
+        <div id="card" class="p-6">
+            <input type="text" placeholder="Your input..." class="input text-gray-800 w-full rounded border-gray-300 p-2"/>
         </div>
-    </nav>
 
-    <!-- Card with Text Input (front side) -->
-    <div id="card" class="max-w-sm mx-auto my-10 bg-white shadow-lg rounded-lg p-6">
-        <input type="text" placeholder="Your input..." class="input text-gray-800 w-full rounded border-gray-300 p-2"/>
+        <!-- Card Backside (hidden by default, show when card is flipped) -->
+        <div id="cardBackside" class="hidden p-6">
+            <input type="text" placeholder="Backside input..." class="input text-gray-800 w-full rounded border-gray-300 p-2"/>
+        </div>
     </div>
-
-    <!-- Card Backside (hidden by default, show when card is flipped) -->
-    <div id="cardBackside" class="hidden max-w-sm mx-auto my-10 bg-white shadow-lg rounded-lg p-6">
-        <input type="text" placeholder="Backside input..." class="input text-gray-800 w-full rounded border-gray-300 p-2"/>
-    </div>
-  </div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
