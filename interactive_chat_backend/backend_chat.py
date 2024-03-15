@@ -75,7 +75,7 @@ def login():
         return "Incorrect password", 401
 
     id = int(list(data["users"].keys()).index(username))
-    return jsonify(generate_token(id))
+    return jsonify({"token": generate_token(id), "id": id})
 
 @app.route("/send_message", methods=["POST"])
 @cross_origin()
@@ -165,15 +165,21 @@ def add_user_to_club():
 @cross_origin()
 def get_user():
     req_data = request.get_json()
-    id = int(req_data["id"])
+    id = int(req_data["id"])    
+    usr_dict = data["users"][list(data["users"].keys())[id]]
+    usr_dict["username"] = list(data["users"].keys())[id]
+    return jsonify(usr_dict)
+
+@app.route("/get_user_via_token", methods=["GET"])
+@cross_origin()
+def get_user_via_token():
+    req_data = request.get_json()
     try:
         token = req_data["token"]
-        valid_code = validate_token(id, token)
+        decoded = jwt.decode(token, secret_key, algorithms='HS256')
     except:
         return "Token cannot be found", 401
-    
-    if valid_code != 200:
-        return "Unknown error occured", valid_code
+    id = int(decoded["id"])
     
     usr_dict = data["users"][list(data["users"].keys())[id]]
     usr_dict["username"] = list(data["users"].keys())[id]
