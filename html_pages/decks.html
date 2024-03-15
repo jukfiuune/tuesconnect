@@ -1,130 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            background: #26253b;
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-        .dropdown {
-            display: inline-block;
-            position: relative;
-        }
+  <style>
+    body {
+      background: #26253b;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
 
-        button{
-            border:none;
-            border-radius:5px;
-            padding:15px 30px;
-            font-size:18px;
-            cursor:pointer;
-        }
+    .dropdown {
+      display: inline-block;
+      position: relative;
+    }
 
-        button:hover{
-            background-color:#ddd;
-        }
+    button {
+      border: none;
+      border-radius: 5px;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
 
-        .dropdown-options {
-            display: none;
-            position: absolute;
-            overflow: auto;
-            background-color:#fff;
-            border-radius:5px;
-            box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
-        }
+    button:hover {
+      background-color: white;
+      z-index: -1;
+    }
 
-        .dropdown:hover .dropdown-options {
-            display: block;
-        }
+    .dropdown-options {
+      display: none;
+      position: absolute;
+      overflow: auto;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+    }
 
-        .dropdown-options button {
-            display: block;
-            color: #000000;
-            padding: 5px;
-            text-decoration: none;
-            padding:20px 40px;
-            border: none; /* Remove default button styles */
-            background: transparent; /* Make background transparent */
-            cursor: pointer;
-        }
+    .dropdown:hover .dropdown-options {
+      display: block;
+    }
 
-        .dropdown-options button:hover {
-            color: #0a0a23;
-            background-color: #ddd;
-            border-radius:5px;
-        }
+    .dropdown-options button {
+      display: block;
+      color: #000000;
+      padding: 5px;
+      text-decoration: none;
+      padding: 20px 40px;
+      border: none;
+      /* Remove default button styles */
+      background: transparent;
+      /* Make background transparent */
+      cursor: pointer;
+    }
 
-        #new-deck-input {
-            display: none;
-            padding: 10px;
-            margin-top: 10px;
-            width: 200px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-    </style>
+    .dropdown-options button:hover {
+      color: #0a0a23;
+      background-color: white;
+      border-radius: 5px;
+    }
+
+    #new-deck-input {
+      display: none;
+      padding: 10px;
+      margin-top: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid white;
+    }
+
+    /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+    .flip-card {
+      background-color: transparent;
+      border-radius: 12px;
+      width: 35%;
+      height:300px;
+      border: 2px solid white;
+      perspective: 1000px;
+      z-index: -999;
+      /* Remove this if you don't want the 3D effect */
+    }
+
+    /* This container is needed to position the front and back side */
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      border-radius: 12px;
+    }
+
+    /* Do an horizontal flip when you move the mouse over the flip box container */
+    .flip-card:active .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Position the front and back side */
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      /* Safari */
+      backface-visibility: hidden;
+    }
+
+    /* Style the front side (fallback if image is missing) */
+    .flip-card-front {
+      background-color: #ffbc86;
+      color: black;
+    }
+
+    /* Style the back side */
+    .flip-card-back {
+      background-color: #ffbc86;
+      color: white;
+      transform: rotateY(180deg);
+    }
+    .flip-card.flip .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+  </style>
 </head>
+
 <body>
+  <div>
     <div class="dropdown">
-        <button>Decks</button>
-        <div class="dropdown-options">
-            <button>Japanese</button>
-            <button>Bulgarian</button>
-            <button id="new-deck">Add new deck</button>
-            <input type="text" id="new-deck-input" placeholder="Enter new deck name">
-        </div>
+      <button>Decks</button>
+      <div style="z-index: 999;" class="dropdown-options">
+        <button>Japanese</button>
+        <button>Bulgarian</button>
+        <button id="new-deck">Add new deck</button>
+        <input type="text" id="new-deck-input" placeholder="Enter new deck name">
+      </div>
     </div>
     <button>
-        Start sesssion
+      Start sesssion
     </button>
     <button>
-        Add new card
+      Add new card
     </button>
-    <input type="text" id="new-card-input" placeholder="Enter new card">
+    <input type="text" id="new-card-input" placeholder="Enter new card"
+      style="height: 54px; background-color: white;border-radius: 14px;margin-right: 10px;">
+  </div>
+  <br>
+  <div class="flip-card" style="display: block;">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="" alt="Avatar" style="width:300px;height:300px;">
+      </div>
+      <div class="flip-card-back">
+        <h1>Rand text here</h1>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        let data = {"Japanese": [["Arigato", "Thank you"]], "Bulgarian": [["supreme", "leader"], ["neshto", "something"], ["john", "cena"], ["bla", "alb"]]};
-        let dropdown = document.querySelector(".dropdown");
-        let dropdownOptions = document.querySelector(".dropdown-options");
-        let newDeckInput = document.getElementById("new-deck-input");
-        
-        document.getElementById("new-deck").addEventListener("click", (event) => {
-            event.stopPropagation();
-            newDeckInput.style.display = "block";
-            newDeckInput.focus();
-        });
+  <script>
+    let data = { "Japanese": [["Arigato", "Thank you"]], "Bulgarian": [["supreme", "leader"], ["neshto", "something"], ["john", "cena"], ["bla", "alb"]] };
+    let dropdown = document.querySelector(".dropdown");
+    let dropdownOptions = document.querySelector(".dropdown-options");
+    let newDeckInput = document.getElementById("new-deck-input");
+    let flipcard = document.querySelector(".flip-card");
+    flipcard.addEventListener("click", () => {
+      flipcard.classList.toggle("flip");
+    });
+    document.getElementById("new-deck").addEventListener("click", (event) => {
+      event.stopPropagation();
+      newDeckInput.style.display = "block";
+      newDeckInput.focus();
+    });
 
-        newDeckInput.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                let newDeckName = newDeckInput.value.trim();
-                if (newDeckName !== "") {
-                    data[newDeckName] = [];
-                    newDeckInput.value = "";
-                    newDeckInput.style.display = "none";
-                    updateDropdownOptions();
-                }
-            }
-        });
-
-        function updateDropdownOptions() {
-            dropdownOptions.innerHTML = "";
-            Object.keys(data).forEach((deck) => {
-                let button = document.createElement("button");
-                button.textContent = deck;
-                dropdownOptions.appendChild(button);
-            });
-            let newDeckButton = document.createElement("button");
-            newDeckButton.textContent = "Add new deck";
-            dropdownOptions.appendChild(newDeckButton);
-            dropdownOptions.appendChild(newDeckInput);
-            dropdown.style.display = "none";
+    newDeckInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        let newDeckName = newDeckInput.value.trim();
+        if (newDeckName !== "") {
+          data[newDeckName] = [];
+          newDeckInput.value = "";
+          newDeckInput.style.display = "none";
+          updateDropdownOptions();
         }
-    </script>
+      }
+    });
+
+    function updateDropdownOptions() {
+      dropdownOptions.innerHTML = "";
+      Object.keys(data).forEach((deck) => {
+        let button = document.createElement("button");
+        button.textContent = deck;
+        dropdownOptions.appendChild(button);
+      });
+      let newDeckButton = document.createElement("button");
+      newDeckButton.textContent = "Add new deck";
+      dropdownOptions.appendChild(newDeckButton);
+      dropdownOptions.appendChild(newDeckInput);
+      dropdown.style.display = "none";
+    }
+  </script>
 </body>
+
 </html>
