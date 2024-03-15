@@ -59,7 +59,7 @@
                 }
             }
 
-        fetch('http://127.0.0.1:5000/get_clubs')
+        fetch('http://10.2.6.187:5000/get_clubs')
             .then(response => response.json())
             .then(data => {
                 const hobbyButtonGroup = document.getElementById('hobby-button-group');
@@ -78,14 +78,14 @@
         document.getElementById("checkmark-button").onclick = function() {
             const selectedButtonGroup = document.getElementById('selected-button-group');
             data = {
-                "token": sessionStorage.getItem("token"),
-                "id": sessionStorage.getItem("id"),
+                "token": localStorage.getItem("token"),
+                "myid": localStorage.getItem("myid"),
                 "clubname": []
             }
             for (let i = 1; i < selectedButtonGroup.children.length; i++) {
                 data.clubname.push(selectedButtonGroup.children[i].textContent);
             }
-            fetch("http://127.0.0.1:5000/add_user_to_club", {
+            fetch("http://10.2.6.187:5000/add_user_to_club", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
