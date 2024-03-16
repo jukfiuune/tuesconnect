@@ -1,8 +1,0 @@
-   'primary': '#423bc8',
-        'hover-primary': '#312bab',
-        'secondary': '#c5c2f6',
-        'accent': '#ffbc86',
-        'hover-accent': '#eda266',
-        'background': '#26253b',
-        'darker-background': '#1b1a2e',
-        'text': '#e2e8f0'
