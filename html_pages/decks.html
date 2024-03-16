@@ -27,6 +27,14 @@ plugins: [],
 }
 
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
 </head>
 <body class="bg-background h-screen">
   <nav class="bg-background">
@@ -37,22 +45,24 @@ plugins: [],
          <img src="./images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
          <!--Dropdown for phones-->
          <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
-           <a href="chats.html" class="block text-text rounded-lg px-4 py-2 mx-2">Chats</a>
-           <a href="decks.html" class="block text-text rounded-lg px-4 py-2 mx-2">Decks</a>
-           <a href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
-           <a href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
-         </div>
-          <!--Nav for large screens-->
-         <div class="hidden sm:flex">
-          <!-- Rounded buttons -->
-          <a href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2">Chats</a>
-          <a href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2">My decks</a>
-          <!-- Spacer -->
-          <div class="flex-grow"></div>
-          <!-- Sign in button and registration -->
-          <a href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
-          <a href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
-         </div>
+          <a id="signouta" href="chats.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+          <a id="signouta" href="decks.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Decks</a>
+          <a id="signin" href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
+          <a id="signin" href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+          <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+        </div>
+         <!--Nav for large screens-->
+        <div class="hidden sm:flex">
+         <!-- Rounded buttons -->
+         <a id="signout" href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+         <a id="signout" href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2 hidden">My decks</a>
+         <!-- Spacer -->
+         <div class="flex-grow"></div>
+         <!-- Sign in button and registration -->
+         <a id="signin" href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
+         <a id="signin" href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
+         <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+        </div>
         </div>
       </div>
     </div>
@@ -63,10 +73,10 @@ plugins: [],
         <!-- Navbar inside card -->
         <nav class="bg-white text-black p-4 rounded-t-lg">
             <div class="flex justify-between">
-                <button id="prevCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
+                <button onclick="prevCard()" id="prevCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
                   <img style="height: 25px; width: 25px;" src="./images/arrow_left.png" alt="arrow">
                 </button>
-                <button id="nextCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
+                <button onclick="nextCard()" id="nextCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
                   <img style="height: 25px; width: 25px;" src="./images/arrow_right.png" alt="arrow">
                 </button>
 
@@ -77,8 +87,6 @@ plugins: [],
                     </button>
                     <!-- Dropdown items (hidden by default, show on button click) -->
                     <div id="dropdownMenu" class="hidden absolute bg-secondary mt-2 py-2 rounded">
-                        <a href="#" class="block px-4 py-2 hover:bg-[#a78bfa]">Item 1</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-[#a78bfa]">Item 2</a>
                     </div>
                 </div>
 
@@ -101,6 +109,79 @@ plugins: [],
 </div>
 
 <script>
+  function signOut() {
+    localStorage.clear();
+    location.reload();
+  }
+
+  if (localStorage.getItem('token')) {
+    var signinButtons = document.querySelectorAll('#signin');
+    signinButtons.forEach(function(button) {
+      button.remove();
+    });
+    var signoutButtons = document.querySelectorAll('#signout');
+    signoutButtons.forEach(function(button) {
+      button.classList.remove('hidden');
+      button.classList.add('flex');
+    });
+    var signoutaButtons = document.querySelectorAll('#signouta');
+    signoutButtons.forEach(function(button) {
+      button.classList.remove('hidden');
+      button.classList.add('block');
+    });
+  }
+    let currentCard = 0, currentDeck = "";
+    let cardData;
+    fetch("http://127.0.0.1:5000/get_decks", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"myid": localStorage.getItem("myid"), "token": localStorage.getItem("token")})
+    })
+    .then(response => response.json())
+    .then(data => {
+        cardData = data;
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        currentDeck = cardData[Object.keys(cardData)[0]];
+        Object.keys(cardData).forEach(message => {
+        var buttonTemplate = `
+          <a onclick="selectDeck(this)" class="block px-4 py-2 hover:bg-[#a78bfa]">${message}</a>
+        `;
+        dropdownMenu.innerHTML += buttonTemplate;
+        });
+        console.log("Flashcards success:", data);
+    })
+    .catch(error => {
+        console.error("Flashcards fail:", error);
+    });
+    function displayCard() {
+        const card = document.getElementById('card');
+        const cardBackside = document.getElementById('cardBackside');
+        console.log(currentDeck, currentCard);
+        let cards = cardData[currentDeck];
+        card.childNodes[1].value = cards[currentCard].front;
+        cardBackside.childNodes[1].value = cards[currentCard].back;
+    }
+    function selectDeck(deck) {
+        currentCard = 0;
+        currentDeck = deck.innerText;
+        displayCard();
+    }
+    function nextCard() {
+        currentCard++;
+        if(currentCard > cardData[currentDeck].length - 1){
+          currentCard = 0;
+        }
+        displayCard();
+    }
+    function prevCard() {
+        currentCard--;
+        if(currentCard < 0){
+          currentCard = cardData[currentDeck].length - 1;
+        }
+        displayCard();
+    }
     document.addEventListener('DOMContentLoaded', function () {
         const dropdownMenuButton = document.getElementById('dropdownMenuButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
@@ -112,11 +193,30 @@ plugins: [],
         dropdownMenuButton.addEventListener('click', function () {
             dropdownMenu.classList.toggle('hidden');
         });
+        
 
         toggleInputButton.addEventListener('click', function () {
+            if(inputEnabled){
+              cardData[currentDeck][currentCard].front = card.childNodes[1].value;
+              cardData[currentDeck][currentCard].back = cardBackside.childNodes[1].value;
+              fetch("http://127.0.0.1:5000/set_decks", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({"myid": localStorage.getItem("myid"), "token": localStorage.getItem("token"), "decks": cardData})
+              })
+              .then(response => response.json())
+              .then(data => {
+                  console.log("Flashcards saved:", data);
+              })
+              .catch(error => {
+                  console.error("Flashcards didnt save:", error);
+              });
+            }
             inputEnabled = !inputEnabled;
-            card.classList.toggle('hidden');
-            cardBackside.classList.toggle('hidden');
+            //card.classList.toggle('hidden');
+            //cardBackside.classList.toggle('hidden');
         });
 
         card.addEventListener('click', function () {
@@ -137,47 +237,6 @@ plugins: [],
         });
     });
 </script>
-  <script>
-    let data = { "Japanese": [["Arigato", "Thank you"]], "Bulgarian": [["supreme", "leader"], ["neshto", "something"], ["john", "cena"], ["bla", "alb"]] };
-    let dropdown = document.querySelector(".dropdown");
-    let dropdownOptions = document.querySelector(".dropdown-options");
-    let newDeckInput = document.getElementById("new-deck-input");
-    let flipcard = document.querySelector("transform: rotateY(180deg)");
-    flipcard.addEventListener("click", () => {
-      flipcard.classList.toggle("flip");
-    });
-    document.getElementById("new-deck").addEventListener("click", (event) => {
-      event.stopPropagation();
-      newDeckInput.style.display = "block";
-      newDeckInput.focus();
-    });
-
-    newDeckInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        let newDeckName = newDeckInput.value.trim();
-        if (newDeckName !== "") {
-          data[newDeckName] = [];
-          newDeckInput.value = "";
-          newDeckInput.style.display = "none";
-          updateDropdownOptions();
-        }
-      }
-    });
-
-    function updateDropdownOptions() {
-      dropdownOptions.innerHTML = "";
-      Object.keys(data).forEach((deck) => {
-        let button = document.createElement("button");
-        button.textContent = deck;
-        dropdownOptions.appendChild(button);
-      });
-      let newDeckButton = document.createElement("button");
-      newDeckButton.textContent = "Add new deck";
-      dropdownOptions.appendChild(newDeckButton);
-      dropdownOptions.appendChild(newDeckInput);
-      dropdown.style.display = "none";
-    }
-  </script>
 </body>
 
 </html>

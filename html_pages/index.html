@@ -125,15 +125,12 @@
     location.reload();
   }
 
-  // Check if "token" is in localStorage
   if (localStorage.getItem('token')) {
-    // Remove buttons with id "signin"
     var signinButtons = document.querySelectorAll('#signin');
     signinButtons.forEach(function(button) {
       button.remove();
     });
 
-    // Show Sign Out button
     var signoutButtons = document.querySelectorAll('#signout');
     signoutButtons.forEach(function(button) {
       button.classList.remove('hidden');

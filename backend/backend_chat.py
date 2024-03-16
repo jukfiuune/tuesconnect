@@ -49,6 +49,7 @@ def register():
         "email": email,
         "password": hash_password,
         "hobbies": [],
+        "decks": {"Japanese": [{"front": "Hello", "back": "World"}, {"front": "Foo", "back": "Bar"}, {"front": "Front", "back": "Back"}], "French": [{"front": "Bonjour", "back": "World"}, {"front": "Goodies", "back": "Bar"}, {"front": "Frontier", "back": "Back"}], "Bulgarian" : [{"front": "Zdrasti", "back": "Svqt"}, {"front": "Bla", "back": "Bar"}, {"front": "Otpred", "back": "Otzad"}]},
         "description": ""
     }
 
@@ -242,6 +243,44 @@ def get_user_via_token():
     usr_dict = data["users"][list(data["users"].keys())[myid]]
     usr_dict["username"] = list(data["users"].keys())[myid]
     return jsonify(usr_dict)
+
+@app.route("/get_decks", methods=["POST"])
+@cross_origin()
+def get_decks():
+    req_data = request.get_json()
+    myid = int(req_data["myid"])
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(myid, token)
+    except:
+        return "Token cannot be found", 401
+    
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    
+    return jsonify(data["users"][list(data["users"].keys())[myid]]["decks"])
+
+@app.route("/set_decks", methods=["POST"])
+@cross_origin()
+def set_decks():
+    req_data = request.get_json()
+    decks = req_data["decks"]
+    myid = int(req_data["myid"])
+    try:
+        token = req_data["token"]
+        valid_code = validate_token(myid, token)
+    except:
+        return "Token cannot be found", 401
+    
+    if valid_code != 200:
+        return "Unknown error occured", valid_code
+    
+    data["users"][list(data["users"].keys())[myid]]["decks"] = decks
+
+    with open("data.json", "w") as file:
+        json.dump(data, file)
+
+    return jsonify(data["users"][list(data["users"].keys())[myid]]["decks"])
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
