@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scheduling</title>
+<style>
+  body {
+            background: #26253b;
+            color: blanchedalmond;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        header {
+            background-color: #1b1a2e;
+            padding: 20px;
+            color: blanchedalmond;
+        }
+
+        .box {
+            background: #26253b;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+            border: 2px  black; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2 {
+            margin-top: 20px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid blanchedalmond;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+</style>
+
+</head>
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+    extend: {
+      colors:{
+        'primary': '#423bc8',
+        'hover-primary': '#312bab',
+        'secondary': '#c5c2f6',
+        'accent': '#ffbc86',
+        'hover-accent': '#eda266',
+        'background': '#26253b',
+        'darker-background': '#1b1a2e',
+        'text': '#e2e8f0'
+      }
+    },
+  },
+  plugins: [],
+  
+}
+
+    </script>
+</head>
+<body class="bg-background text-center">
+    <nav class="bg-background">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center">
+             <!-- Logo Only test for now -->
+             <img src="../images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
+             <!--Dropdown for phones-->
+             <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
+               <a id="signouta" href="chats.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+               <a id="signouta" href="decks.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Decks</a>
+               <a id="signin" href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
+               <a id="signin" href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+               <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+             </div>
+              <!--Nav for large screens-->
+             <div class="hidden sm:flex">
+              <!-- Rounded buttons -->
+              <a id="signout" href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+              <a id="signout" href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2 hidden">My decks</a>
+              <!-- Spacer -->
+              <div class="flex-grow"></div>
+              <!-- Sign in button and registration -->
+              <a id="signin" href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
+              <a id="signin" href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
+              <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+             </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+<header class="bg-[1b1a2e] p-5 text-[#ffebcd ]"><h1 class="mt-5">Scheduling</h1></header>
+<div class="box">
+<h2 class="mt-5"> Making a schedule some times looks like a boring task to do,but you can make our 
+  life easyer by making one.Here some ways to make one:</h2>
+  <h3>Develop a Schedule</h3>
+<p class="mx-4 leading-normal">The first step is planning out your week, deciding which days you have available for study. You can also schedule in the amount of time you want to spend studying, according to your learning preferences.
+  Add your study sessions into your calendar, as you would your work or social commitments. This will drive home the point that this time is specifically for learning.
+  If you have a busy schedule, you may need to get creative in allocating time to study – such as using the time between classes, or your commute into university on the tram or train.</p>
+<h3>Set realistic goals</h3>
+<p class="mx-4 leading-normal">While goal setting is important, you don’t want to over-commit, and then find you fall short of what you hope to achieve.
+  You pay have one big goal for a block or semester, but you’ll find success if you break this down into smaller daily or weekly goals.
+  You’ve set yourself up well by creating a study plan and now have a higher chance of smashing your goal.</p>
+<h3>Plan your breaks</h3>
+<p class="mx-4 leading-normal">It’s estimated that an adult can hold focus for around twenty minutes. After this, we start to disengage.
+  So, it’s important to schedule in break time around your study.
+  You could:</p>
+<p class="mx-4 leading-normal">• Stretch</p>
+<p class="mx-4 leading-normal">• Hydrate</p>
+<p class="mx-4 leading-normal">• Have a snack</p>
+<p class="mx-4 leading-normal">• Go for a walk or run</p>
+<p class="mx-4 leading-normal">• Go for a swim</p>
+<p class="mx-4 leading-normal">• Attend a yoga class</p>
+<p class="mx-4 leading-normal">The main thing is to get out of your head and do something different while you’re taking a break.
+  This way you’ll be reinvigorated once you resume study.</p>
+</div>
+</body>
+</html>

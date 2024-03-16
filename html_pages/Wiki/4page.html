@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anki(flashcards)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+    extend: {
+      colors:{
+        'primary': '#423bc8',
+        'hover-primary': '#312bab',
+        'secondary': '#c5c2f6',
+        'accent': '#ffbc86',
+        'hover-accent': '#eda266',
+        'background': '#26253b',
+        'darker-background': '#1b1a2e',
+        'text': '#e2e8f0'
+      }
+    },
+  },
+  plugins: [],
+  
+}
+
+    </script>
+</head>
+<body class="bg-background text-center">
+    <nav class="bg-background">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center">
+             <!-- Logo Only test for now -->
+             <img src="../images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
+             <!--Dropdown for phones-->
+             <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
+               <a id="signouta" href="chats.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+               <a id="signouta" href="decks.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Decks</a>
+               <a id="signin" href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
+               <a id="signin" href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+               <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+             </div>
+              <!--Nav for large screens-->
+             <div class="hidden sm:flex">
+              <!-- Rounded buttons -->
+              <a id="signout" href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+              <a id="signout" href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2 hidden">My decks</a>
+              <!-- Spacer -->
+              <div class="flex-grow"></div>
+              <!-- Sign in button and registration -->
+              <a id="signin" href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
+              <a id="signin" href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
+              <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+             </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+<header class="bg-[#1b1a2e] p-5 text-[#ffebcd]">
+    <h1 class="mt-5">Anki(flashcards)</h1>
+</header>
+
+<div class="bg-background text-[#ffebcd] p-5 rounded-[20px] my-5 mx-auto w-4/5 max-w-[800px] text-left border-2 border-black" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+    <h2 class="mt-5">What is Anki?</h2>
+    <p class="mx-4 leading-normal">Anki is a program which makes remembering things easy. Because it's a lot more efficient than traditional study methods, you can either greatly decrease your time spent studying, or greatly increase the amount you learn.</p>
+
+    <p class="mx-4 leading-normal">Anyone who needs to remember things in their daily life can benefit from Anki. Since it is content-agnostic and supports images, audio, videos and scientific markup (via LaTeX), the possibilities are endless. For example:</p>
+
+    <ul style="list-style-type: none; padding-left: 0;">
+        <li>Learning a language</li>
+        <li>Studying for medical and law exams</li>
+        <li>Memorizing people's names and faces</li>
+        <li>Brushing up on geography</li>
+        <li>Mastering long poems</li>
+        <li>Even practicing guitar chords!</li>
+    </ul>
+
+    <p class="mx-4 leading-normal">Here is a link to install it: <a class="text-accent hover:underline" href="https://apps.ankiweb.net/" target="_blank">ANKI</a></p>
+    <p class="mx-4 leading-normal">Here is a link to how to use it: <a class="text-accent hover:underline" href="https://www.youtube.com/watch?v=WmPx333n5UQ" target="_blank">HERE</a></p>
+</div>
+
+</body>
+</html>
+

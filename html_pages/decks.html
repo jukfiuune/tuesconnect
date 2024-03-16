@@ -45,24 +45,24 @@ plugins: [],
          <img src="./images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
          <!--Dropdown for phones-->
          <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
-          <a id="signouta" href="chats.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
-          <a id="signouta" href="decks.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Decks</a>
-          <a id="signin" href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
-          <a id="signin" href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+           <a id="signouta" href="chats.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+           <a id="signouta" href="decks.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Decks</a>
+           <a id="signin" href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
+           <a id="signin" href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+           <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+         </div>
+          <!--Nav for large screens-->
+         <div class="hidden sm:flex">
+          <!-- Rounded buttons -->
+          <a id="signout" href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+          <a id="signout" href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2 hidden">My decks</a>
+          <!-- Spacer -->
+          <div class="flex-grow"></div>
+          <!-- Sign in button and registration -->
+          <a id="signin" href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
+          <a id="signin" href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
           <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
-        </div>
-         <!--Nav for large screens-->
-        <div class="hidden sm:flex">
-         <!-- Rounded buttons -->
-         <a id="signout" href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
-         <a id="signout" href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2 hidden">My decks</a>
-         <!-- Spacer -->
-         <div class="flex-grow"></div>
-         <!-- Sign in button and registration -->
-         <a id="signin" href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
-         <a id="signin" href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
-         <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
-        </div>
+         </div>
         </div>
       </div>
     </div>
@@ -74,16 +74,16 @@ plugins: [],
         <nav class="bg-white text-black p-4 rounded-t-lg">
             <div class="flex justify-between">
                 <button onclick="prevCard()" id="prevCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
-                  <img style="height: 25px; width: 25px;" src="./images/arrow_left.png" alt="arrow">
+                  <img class="h-3 w-3 md:h-6 md:w-6 " src="./images/arrow_left.png" alt="arrow">
                 </button>
                 <button onclick="nextCard()" id="nextCard" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
-                  <img style="height: 25px; width: 25px;" src="./images/arrow_right.png" alt="arrow">
+                  <img class="h-3 w-3 md:h-6 md:w-6 " src="./images/arrow_right.png" alt="arrow">
                 </button>
 
                 <!-- Dropdown Menu Placeholder -->
                 <div class="relative">
                     <button id="dropdownMenuButton" class="bg-secondary hover:bg-[#a78bfa] p-2 rounded">
-                      <img style="height: 25px; width: 25px;" src="./images/card.png" alt="menu">
+                      <img class="h-3 w-3 md:h-6 md:w-6 " src="./images/card.png" alt="menu">
                     </button>
                     <!-- Dropdown items (hidden by default, show on button click) -->
                     <div id="dropdownMenu" class="hidden absolute bg-secondary mt-2 py-2 rounded">
@@ -91,7 +91,7 @@ plugins: [],
                 </div>
 
                 <button id="toggleInput" class="bg-secondary focus:bg-[#a78bfa] p-2 rounded">
-                  <img style="height: 25px; width: 25px;" src="./images/pencil.png" alt="edit">
+                  <img class="h-3 w-3 md:h-6 md:w-6 " src="./images/pencil.png" alt="edit">
                 </button>
             </div>
         </nav>

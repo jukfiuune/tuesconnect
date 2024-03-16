@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mindmapping</title>
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+    extend: {
+      colors:{
+        'primary': '#423bc8',
+        'hover-primary': '#312bab',
+        'secondary': '#c5c2f6',
+        'accent': '#ffbc86',
+        'hover-accent': '#eda266',
+        'background': '#26253b',
+        'darker-background': '#1b1a2e',
+        'text': '#e2e8f0'
+      }
+    },
+  },
+  plugins: [],
+  
+}
+
+    </script>
+</head>
+<body class="bg-background text-center">
+    <nav class="bg-background">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center">
+             <!-- Logo Only test for now -->
+             <img src="../images/connect_logo_2.png" class="h-10 w-auto mr-4" onclick="toggleMenu();">
+             <!--Dropdown for phones-->
+             <div id="menu" class="hidden sm:hidden absolute bg-background mt-48">
+               <a id="signouta" href="chats.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+               <a id="signouta" href="decks.html" class="text-text rounded-lg px-4 py-2 mx-2 hidden">Decks</a>
+               <a id="signin" href="registration.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Register</a>
+               <a id="signin" href="login.html" class="block bg-accent text-black rounded-lg px-4 py-2 mx-2 mb-2 hover:bg-hover-accent">Sign In</a>
+               <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+             </div>
+              <!--Nav for large screens-->
+             <div class="hidden sm:flex">
+              <!-- Rounded buttons -->
+              <a id="signout" href="chats.html" class=" text-text rounded-lg px-4 py-2 mx-2 hidden">Chats</a>
+              <a id="signout" href="decks.html" class = "text-text rounded-lg px-4 py-2 mx-2 hidden">My decks</a>
+              <!-- Spacer -->
+              <div class="flex-grow"></div>
+              <!-- Sign in button and registration -->
+              <a id="signin" href="registration.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 mr-2 hover:bg-hover-accent">Register</a>
+              <a id="signin" href="login.html" class="flex justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent">Sign In</a>
+              <a id="signout" class="justify-end bg-accent text-black rounded-lg px-4 py-2 hover:bg-hover-accent hidden" onclick="signOut();">Sign Out</a>
+             </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+</head>
+<body>
+
+<header class="bg-[#1b1a2e] p-5 text-[#ffebcd]"><h1 class="mt-5">Mindmapping</h1></header>
+<div class="bg-background text-[#ffebcd] p-5 rounded-[20px] my-5 mx-auto w-4/5 max-w-[800px] text-left border-2 border-black" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+<h2 class="mt-5">What is a Mind Map?</h2>
+<p class="mx-4 leading-normal">A Mind Map is an easy way to brainstorm thoughts organically without worrying
+   about order and structure. It allows you to visually structure your ideas to help with analysis and recall.</p>
+   <h2 class="mt-5">Here some examples:</h2>
+   
+   <h3>• Learning A Language:</h3><p class="mx-4 leading-normal">Learning a language goes through various aspects and layers of applications. 
+    Still, this program has the benefit of a generic framework with the lessons often revolving around things 
+    we already know. Therefore, learners might already have theoretical knowledge, at least a basic concept 
+    of it, and are ready for practical approaches. In this mind map template about learning English verb 
+    combinations, the keypoints are verbs as well, denoted by specific courses of action. 
+    So it covers both objectives of theory and practical.</p>
+   
+    <h3>• Group Work:</h3><p class="mx-4 leading-normal">Group work is a broader spectrum than group studying. It radically involves a focal matter 
+    pursued by a group but leverages individual inputs systematically. This sort of project needs
+     a fail-proof process that makes sure that everyone's on board; everything is on board.
+    This crafty template about Social Media Usage can be a shining example of how it works.</p>
+  
+    <h3>• Exam Preparation:</h3><p class="mx-4 leading-normal">By taking out perceived notions from the mind and mirroring it 
+    in a visual illustration, students can radically improve their sense of urgency and avoid 
+    procrastination when preparing for an exam. The multivariate essentials like key lectures,
+    notes, timeframes, criteria, available resources, or lacking areas can be brainstormed in
+    this graphic layout so that problems are easier to address and strengths can effectually
+    motivate. This SWOT analysis map makes up a valuable resource for the matter, streamlining
+    different conditions and situations into Strengths, Weaknesses, Opportunity, and Threat (SWOT).
+    It inspires students to maintain a target based regime of studies and related activity for 
+    exam preparation, scale progress, rinse, and repeat. The conceptual use 
+    of color, structure, and a minimalist layout can simplify complex variables 
+    of prerequisites faced by students during the exam preparation phase.</p>
+   
+    <h3>• Time Management:</h3><p class="mx-4 leading-normal">Being always on the go, living off last minutes, 
+  and nicks of time are the story of every other student's life. It pays the 
+  most to be punctual, but chasing time needs a forgiving regime than to 
+  challenge biological clocks. This template is much more than a timetable,
+  coming with tips, essentials, and priorities. This sort of mind map is 
+  probably thriving in stinging the creator along, giving them a sense of
+  security that they can design their life. So not only engaging content,
+  but it is also an exercise that may run in the sub-conscious of pursuers,
+  even if they fail to keep certain things in mind.</p>
+</div>
+</body>
+</html>
